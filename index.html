@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" src="main.js"></script>
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>PRACTICA ENTREGABLE 1 APLICACIONES WEB</title>
+
+  <!-- Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body role="document">
+
+      <div class="container theme-showcase" role="main">
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h1>Tu comida a Domicilio S.L.</h1>
+          <p>Por favor , rellene los formularios para disfrutar de su comida :-)</p>
+          <p>Notas para correción : la utilización de Boostrap es meramente estética.</p>
+        </div>
+        <div class="col-md-6">
+          <h2> Tus datos personales </h2>
+          <form>
+            <div class="form-group" id="divnombre">
+              <label for="nombre">Nombre y Apellidos</label>
+              <span title="Introduce tu nombre y apellidos (solo texto)">
+                <input type="regexp" class="form-control" id="nombre" pattern="[A-Za-z]" onblur="comprobarNombre(this);" placeholder="Introduce tu nombre y apellidos" required>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="nif">NIF</label>
+              <span title="Introduce tu NIF(8 números + dígito de control)">
+                <input type="text" class="form-control" id="nif" onblur="comprobarNIF(this);" placeholder="Introduce tu NIF" required>
+              </span>
+            </div>
+            <div class="form-group">
+
+              <label for="direccion">Dirección</label>
+              <span title="Introduce tu dirección(alfanumérico)">
+                <input type="text" class="form-control" id="direccion" placeholder="Introduce tu dirección" required >
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="codigopostal">Código Postal</label>
+              <span title="Introduce tu código postal(5 digitos)">
+                <input type="regexp" class="form-control" id="codigopostal" onblur="comprobarCodigopostal(this);" pattern="[0-9]{5}" placeholder="Introduce tu código postal" required >
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <span title="Introduce tu email(xxx@yyy.zzz)">
+                <input type="email" class="form-control" id="email" onblur="comprobarEmail(this);" placeholder="Introduce tu email">
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <span title="Introduce tu teléfono(5 dígitos)">
+                <input type="regex" class="form-control" id="telefono" pattern="[0-9]{5}" placeholder="Introduce tu teléfono">
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6"> 
+            <h2> Tus datos del pedido </h2>
+            <h5> Primer Plato </h5>
+            <div class="checkbox">
+              <span title="Elija 1 primer plato">
+                <label>
+
+                  <input type="checkbox" id="platoa" onclick="comprobarPlatoPrincipal(this)"> Plato A (10€)
+                </label>
+                <label> 
+                  <input type="checkbox" id="platob" onclick="comprobarPlatoPrincipal(this)"> Plato B (12€)
+                </label>
+                <label>
+                  <input type="checkbox" id="platoc" onclick="comprobarPlatoPrincipal(this)"> Plato C (7€)
+                </label>
+              </span>
+            </div>
+            <h5> Segundo Plato </h5>
+            <div class="checkbox">
+             <span title="Elija 1 segundo plato">
+              <label>
+                <input type="checkbox" id="platoz" onclick="comprobarSegundoPlato(this)"> Plato Z (11€)
+              </label>
+              <label> 
+                <input type="checkbox" id="platox" onclick="comprobarSegundoPlato(this)"> Plato X (6.5€)
+              </label>
+              <label>
+                <input type="checkbox" id="platov" onclick="comprobarSegundoPlato(this)"> Plato V (5€)
+              </label>
+              <label>
+                <input type="checkbox" id="platow" onclick="comprobarSegundoPlato(this)"> Plato W (9€)
+              </label>
+            </span>
+          </div>
+          <h5> Ingredientes adicionales </h5>
+          <div class="checkbox">
+            <span title="Elija sus ingredientes para el segundo plato (MAX. 3 ingredientes)">
+              <label>
+                <input type="checkbox" id="ingrediente1" onclick="comprobarIngredientes(this)"> Ingrediente 1
+              </label>
+              <label> 
+                <input type="checkbox" id="ingrediente2" onclick="comprobarIngredientes(this)">  Ingrediente 2
+              </label>
+              <label>
+                <input type="checkbox" id="ingrediente3" onclick="comprobarIngredientes(this)"> Ingrediente 3
+              </label>
+              <label>
+                <input type="checkbox" id="ingrediente4" onclick="comprobarIngredientes(this)"> Ingrediente 4
+              </label>
+              <label>
+                <input type="checkbox" id="ingrediente5" onclick="comprobarIngredientes(this)"> Ingrediente 5
+              </label>
+            </div>
+          </span>
+
+          <h5> Bebidas </h5>
+          <span title="Elija 1 bebida">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="bebidab1" onclick="comprobarBebidas(this)"> Bebida b1 (1.5€)
+              </label>
+              <label> 
+                <input type="checkbox" id="bebidab2" onclick="comprobarBebidas(this)"> Bebida b2 (2€)
+              </label>
+              <label>
+                <input type="checkbox" id="bebidab3" onclick="comprobarBebidas(this)"> Bebida b3 (4€)
+              </label>
+              <label>
+                <input type="checkbox" id="bebidab4" onclick="comprobarBebidas(this)"> Bebida b4 (1.75€)
+              </label>
+              <label>
+                <input type="checkbox" id="bebidab5" onclick="comprobarBebidas(this)"> Bebida b5 (3.5€)
+              </label>
+            </div>
+          </span>
+
+          <div class="form-group">
+            <label for="promocodigo">Código de promocion</label>
+            <span title="Introduce tu código de promoción">
+              <input type="regex" class="form-control" id="promocodigo" pattern="[A-Z]{2}[0-9]{3}" onblur="comprobarCodigo(this)" placeholder="Introduce tu código de promoción">
+              <input type="hidden" class="form-control" id="promocodigohidden" value="false" >
+            </span>
+          </div>
+
+          <h2> Precio Pedido : </h2> 
+          <h3 id="precio">0</h3>
+
+        </div>
+
+        <div class="col-md-12"> 
+         <button type="submit" class="btn btn-success btn-lg" id="submitbutton" style="display: block; width: 100%;" >Pedir</button>
+       </div>
+
+     </form>
+
+       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
+       <script src="bootstrap/js/jquery.min.js"></script>
+       <!-- Include all compiled plugins (below), or include individual files as needed 
+       <script src="bootstrap/js/bootstrap.min.js"></script>-->
+     </body>
+     </html>
