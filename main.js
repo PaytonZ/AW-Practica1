@@ -6,16 +6,20 @@ function round(num, places)
 function comprobarNombre(textbox)
 {
 	var re = /^[A-Za-z]+$/;
-	if(re.test(textbox.value))
+
+	if(textbox.value.length > 0 )
 	{
-		textbox.setCustomValidity("");
-		return true;
-	}
-	else
-	{
-		alert("Campo nombre no debe contener números");
-		textbox.setCustomValidity("No debe contener números");
-		return false;
+		if(re.test(textbox.value))
+		{
+			textbox.setCustomValidity("");
+			return true;
+		}
+		else
+		{
+			alert("Campo nombre no debe contener números");
+			textbox.setCustomValidity("No debe contener números");
+			return false;
+		}
 	}
 
 }
@@ -23,48 +27,52 @@ function comprobarNombre(textbox)
 function comprobarNIF(textbox)
 {
 	var table = "TRWAGMYFPDXBNJZSQVHLCKE";
-	console.log(textbox.value.lenght);
-	if(textbox.value.length==9)
+	if(textbox.value.length > 0 )
 	{
-
-		var numbers_DNI = textbox.value.substring(0,8);
-		var letter = table.charAt(numbers_DNI % 23);
-		var dni = numbers_DNI+letter;
-		if(dni == textbox.value) 
+		if(textbox.value.length==9)
 		{
-			textbox.setCustomValidity("");
-			return true;
-		}
-		else
+
+			var numbers_DNI = textbox.value.substring(0,8);
+			var letter = table.charAt(numbers_DNI % 23);
+			var dni = numbers_DNI+letter;
+			if(dni == textbox.value) 
+			{
+				textbox.setCustomValidity("");
+				return true;
+			}
+			else
+			{
+				alert("Campo DNI 8 números + digito de control");
+				textbox.setCustomValidity("Campo DNI 8 números + digito de control");
+				return false;
+			}
+
+		}else
 		{
 			alert("Campo DNI 8 números + digito de control");
 			textbox.setCustomValidity("Campo DNI 8 números + digito de control");
 			return false;
 		}
-
-	}else
-	{
-		alert("Campo DNI 8 números + digito de control");
-		textbox.setCustomValidity("Campo DNI 8 números + digito de control");
-		return false;
 	}
 
 }
 
 function comprobarCodigopostal(textbox){
 
-	//var re = "/^[0-9]{5}+$/";
-	var re = /^[0-9]{5}/;	
-	if(re.test(textbox.value) && textbox.value.length == 5 )
-	{
-		textbox.setCustomValidity("");
-		return true;
-	}
-	else
-	{
-		alert("Campo codigo postal solo debe contener 5 números");
-		textbox.setCustomValidity("Solo debe contener 5 números");
-		return false;
+	var re = /^[0-9]{5}/;
+	if(textbox.value.length > 0 )
+	{	
+		if(re.test(textbox.value) && textbox.value.length == 5 )
+		{
+			textbox.setCustomValidity("");
+			return true;
+		}
+		else
+		{
+			alert("Campo codigo postal solo debe contener 5 números");
+			textbox.setCustomValidity("Solo debe contener 5 números");
+			return false;
+		}
 	}
 }
 
@@ -72,33 +80,46 @@ function comprobarEmail(textbox)
 {
 	var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-	if(re.test(textbox.value))
+	if(textbox.value.length > 0 )
 	{
-		textbox.setCustomValidity("");
-		return true;
+		if(re.test(textbox.value))
+		{
+			textbox.setCustomValidity("");
+			return true;
+		}
+		else
+		{
+			alert("Campo email formato xxx@yyy.zzz");
+			textbox.setCustomValidity("Campo email formato xxx@yyy.zzz");
+			return false;
+		}
 	}
 	else
 	{
-		alert("Campo email formato xxx@yyy.zzz");
-		textbox.setCustomValidity("Campo email formato xxx@yyy.zzz");
-		return false;
+		textbox.setCustomValidity("");
 	}
-
 }
 
 function comprobarTelefono(textbox)
 {
-	var re = /^[0-9]{5}/;	
-	if(re.test(textbox.value) && textbox.value.length == 5 )
-	{
-		textbox.setCustomValidity("");
-		return true;
+	var re = /^[0-9]{5}/;
+	if(textbox.value.length > 0 )
+	{	
+		if(re.test(textbox.value) && textbox.value.length == 5 )
+		{
+			textbox.setCustomValidity("");
+			return true;
+		}
+		else
+		{
+			alert("Campo telefono solo debe contener 5 números");
+			textbox.setCustomValidity("Solo debe contener 5 números");
+			return false;
+		}
 	}
 	else
 	{
-		alert("Campo telefono solo debe contener 5 números");
-		textbox.setCustomValidity("Solo debe contener 5 números");
-		return false;
+		textbox.setCustomValidity("");
 	}
 }
 
@@ -241,9 +262,9 @@ function comprobarBebidas(checkbox)
 }
 function comprobarCodigo(textbox)
 {
-	var re = /[A-Z]{2}[0-9]{3}/;
+	var re = /^[A-Z]{2}[0-9]{3}$/;
 	var promocodigohidden = document.getElementById("promocodigohidden");
-
+	
 	if(re.test(textbox.value))
 	{
 		
@@ -255,8 +276,6 @@ function comprobarCodigo(textbox)
 		var digito5 = parseInt(textbox.value.charAt(4));
 
 		var resultado = letra1 + letra2 + digito3 + digito4 + digito5;
-		console.log(resultado);
-
 		var pedido = document.getElementById("precio");
 
 		if(resultado==101 && promocodigohidden.value == "false")
@@ -264,20 +283,19 @@ function comprobarCodigo(textbox)
 			pedido.textContent = round(round(parseFloat(pedido.textContent),2) * 0.75,2);
 			promocodigohidden.value = "true";
 		}
-		else if(resultado!=101  && promocodigohidden.value == "true" )
+		else if(resultado!=101 && promocodigohidden.value == "true" )
 		{
 			pedido.textContent = round(round(parseFloat(pedido.textContent),2) / 0.75,2);
 			promocodigohidden.value = "false";
 		}
+
 		pedido.textContent = round(parseFloat(pedido.textContent),2);
-
-
 		textbox.setCustomValidity("");
 		return true;
-		
 	}
 	else
 	{
+		console.log("Invalid code");
 		if(promocodigohidden.value == "true" )
 		{
 			var pedido = document.getElementById("precio");
@@ -285,11 +303,34 @@ function comprobarCodigo(textbox)
 			pedido.textContent = round(parseFloat(pedido.textContent),2);
 			promocodigohidden.value = "false";
 		}
-		alert("No es un código de promoción válido");
-		
+		if(textbox.value.length>0)
+		{
+			alert("No es un código de promoción válido");
+		}
 		return false;
-		
 	}
+}
+
+onsubmit = function(submit)
+{
+	var email = document.getElementById("email");
+	var telefono = document.getElementById("telefono");
+
+	var sum = 0;
+	if (email.length > 0 && email.valid) sum+=1;
+	if (telefono.length > 0 && telefono.valid) sum+=1;
+
+	if(sum == 0 )
+	{
+		alert("Introduce email o telefono");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	
+	return false;
 
 
 }
